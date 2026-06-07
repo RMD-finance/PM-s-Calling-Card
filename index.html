@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Port Manager Calling Card</title>
+
+<link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+
+    background:
+    radial-gradient(circle at top left,#2f63ff 0%,transparent 35%),
+    radial-gradient(circle at bottom right,#ff3b30 0%,transparent 35%),
+    linear-gradient(135deg,#0f172a,#1e293b,#111827);
+}
+
+.card{
+
+    width:1100px;
+    max-width:95%;
+
+    border-radius:40px;
+
+    backdrop-filter:blur(40px);
+    -webkit-backdrop-filter:blur(40px);
+
+    background:
+    rgba(255,255,255,.12);
+
+    border:1px solid rgba(255,255,255,.18);
+
+    box-shadow:
+    0 8px 32px rgba(0,0,0,.25),
+    inset 0 1px 1px rgba(255,255,255,.25);
+
+    overflow:hidden;
+
+    position:relative;
+}
+
+.card::before{
+    content:'';
+    position:absolute;
+    inset:0;
+
+    background:
+    linear-gradient(
+    145deg,
+    rgba(255,255,255,.15),
+    rgba(255,255,255,.02));
+
+    pointer-events:none;
+}
+
+.wrapper{
+    display:grid;
+    grid-template-columns:350px 1fr;
+}
+
+.sidebar{
+
+    padding:50px;
+
+    border-right:
+    1px solid rgba(255,255,255,.12);
+
+    background:
+    rgba(255,255,255,.03);
+
+    backdrop-filter:blur(20px);
+}
+
+.profile{
+
+    width:180px;
+    height:180px;
+
+    margin:auto;
+
+    border-radius:50%;
+    overflow:hidden;
+
+    border:
+    3px solid rgba(255,255,255,.25);
+
+    box-shadow:
+    0 20px 40px rgba(0,0,0,.25);
+}
+
+.profile img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.qr{
+
+    margin-top:35px;
+    text-align:center;
+}
+
+.qr img{
+
+    width:140px;
+    height:140px;
+
+    border-radius:24px;
+
+    background:
+    rgba(255,255,255,.18);
+
+    padding:10px;
+
+    backdrop-filter:blur(20px);
+}
+
+.socials{
+
+    display:flex;
+    justify-content:center;
+    gap:15px;
+
+    margin-top:35px;
+}
+
+.socials a{
+
+    width:48px;
+    height:48px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:white;
+    text-decoration:none;
+
+    background:
+    rgba(255,255,255,.12);
+
+    border:
+    1px solid rgba(255,255,255,.15);
+
+    backdrop-filter:blur(20px);
+
+    transition:.3s;
+}
+
+.socials a:hover{
+
+    transform:translateY(-4px);
+
+    background:
+    rgba(255,255,255,.22);
+}
+
+.content{
+    padding:60px;
+    color:white;
+}
+
+.top-row{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+}
+
+.badge{
+
+    padding:10px 18px;
+
+    border-radius:999px;
+
+    background:
+    rgba(255,255,255,.10);
+
+    border:
+    1px solid rgba(255,255,255,.15);
+
+    font-size:13px;
+    font-weight:600;
+
+    backdrop-filter:blur(20px);
+}
+
+.logo{
+
+    height:65px;
+    opacity:.95;
+}
+
+.name{
+
+    margin-top:25px;
+
+    font-size:56px;
+    font-weight:700;
+
+    letter-spacing:-1px;
+}
+
+.position{
+
+    font-size:24px;
+    color:
+    rgba(255,255,255,.75);
+
+    margin-top:8px;
+}
+
+.office{
+
+    margin-top:35px;
+
+    padding:24px;
+
+    border-radius:24px;
+
+    background:
+    rgba(255,255,255,.08);
+
+    border:
+    1px solid rgba(255,255,255,.12);
+
+    backdrop-filter:blur(20px);
+}
+
+.office h3{
+
+    font-size:22px;
+    margin-bottom:6px;
+}
+
+.office p{
+
+    color:
+    rgba(255,255,255,.70);
+}
+
+.grid{
+
+    margin-top:30px;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:18px;
+}
+
+.item{
+
+    padding:20px;
+
+    border-radius:24px;
+
+    background:
+    rgba(255,255,255,.08);
+
+    border:
+    1px solid rgba(255,255,255,.10);
+
+    backdrop-filter:blur(20px);
+}
+
+.label{
+
+    font-size:12px;
+
+    text-transform:uppercase;
+
+    color:
+    rgba(255,255,255,.55);
+
+    margin-bottom:8px;
+
+    letter-spacing:1px;
+}
+
+.value{
+
+    font-size:15px;
+    line-height:1.7;
+}
+
+.address{
+    grid-column:1/-1;
+}
+
+.footer{
+
+    margin-top:35px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.website{
+
+    color:white;
+    text-decoration:none;
+
+    font-weight:500;
+}
+
+.button{
+
+    padding:14px 24px;
+
+    border-radius:999px;
+
+    background:
+    rgba(255,255,255,.15);
+
+    border:
+    1px solid rgba(255,255,255,.20);
+
+    color:white;
+    text-decoration:none;
+
+    backdrop-filter:blur(20px);
+}
+
+.button:hover{
+    background:
+    rgba(255,255,255,.22);
+}
+
+@media(max-width:900px){
+
+.wrapper{
+    grid-template-columns:1fr;
+}
+
+.sidebar{
+    border-right:none;
+    border-bottom:1px solid rgba(255,255,255,.12);
+}
+
+.content{
+    padding:35px;
+}
+
+.grid{
+    grid-template-columns:1fr;
+}
+
+.name{
+    font-size:40px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="wrapper">
+
+        <aside class="sidebar">
+
+            <div class="profile">
+                <img src="https://i.imgur.com/xLoLLZB.png" alt="Profile Photo">
+            </div>
+
+            <div class="socials">
+                <a href="https://www.ppa.com.ph"><i class="fas fa-globe"></i></a>
+                <a href="https://www.facebook.com/p/PMO-NCR-NORTH-61565010940715/"><i class="fab fa-facebook-f"></i></a>
+            </div>
+
+        </aside>
+
+        <main class="content">
+
+            <div class="top-row">
+                <span class="badge">Executive Profile</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Philippine_Ports_Authority_%28PPA%29.svg/1280px-Philippine_Ports_Authority_%28PPA%29.svg.png" class="logo">
+            </div>
+
+            <h1 class="name">
+                Jenneliza D. Rebong
+            </h1>
+
+            <div class="position">
+                Port Manager
+            </div>
+
+            <div class="office">
+                <h3>Philippine Ports Authority</h3>
+                <p>Port Management Office NCR North</p>
+            </div>
+
+            <div class="grid">
+
+                <div class="item">
+                    <div class="label">Mobile</div>
+                    <div class="value">+63 917 556 5889</div>
+                </div>
+
+                <div class="item">
+                    <div class="label">Office</div>
+                    <div class="value">(02) 8244-2612 / 8245-2930</div>
+                </div>
+
+                <div class="item">
+                    <div class="label">Email</div>
+                    <div class="value">jdrebong1@ppa.com.ph</div>
+                </div>
+
+                <div class="item">
+                    <div class="label">Department</div>
+                    <div class="value">PMO NCR North</div>
+                </div>
+
+                <div class="item address">
+                    <div class="label">Office Address</div>
+                    <div class="value">
+                        PMO Administration Building,
+                        Mel Lopez Blvd., North Harbor,
+                        Tondo, Manila 1013, Philippines
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="footer">
+
+                <a href="#" class="website">
+                    www.ppa.com.ph
+                </a>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</div>
+
+</body>
+</html>
